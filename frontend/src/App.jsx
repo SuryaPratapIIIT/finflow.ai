@@ -180,21 +180,21 @@ function AIStudioView() {
 
 
 // --- LIVE REASONING TERMINAL COMPONENT ---
-function AIReasoningTerminal({ invoiceId, onClose }) {
+function AIReasoningTerminal({ invoice, onClose, isComplete }) {
   const [logs, setLogs] = useState([]);
+  
   const messages = [
-    `> Initializing LangGraph Orchestrator for Invoice #${invoiceId}...`,
-    `> Fetching customer profile and payment history...`,
-    `> Connecting to ChromaDB (RAG)...`,
-    `> RAG: Retrieved 3 relevant company policies.`,
-    `> Analyzing overdue duration and customer reliability...`,
-    `> Detected Tone requirement based on policy...`,
-    `> [Finance Agent] Drafting initial communications...`,
-    `> [Reflection Agent] Reviewing draft against policies...`,
-    `> Groundedness score computed. Modifying draft...`,
-    `> Generating Final Email and Voice Scripts...`,
-    `> Saving JSON artifacts to storage...`,
-    `> Agent workflow complete! Pipeline closed.`
+    `> Initializing FinFlow Agentic Pipeline for ${invoice.name}...`,
+    `> Fetching invoice details: Amount $${invoice.amount}, Due: ${invoice.due_date} (${invoice.days_overdue} days overdue)`,
+    `> [Research Agent] Querying ChromaDB for late fee and escalation policies...`,
+    `> [Research Agent] Retrieved 3 relevant policy documents.`,
+    `> [Finance Agent] Calculating accrued interest...`,
+    `> [Finance Agent] Determined tone: 'firm' (Overdue by > 14 days)`,
+    `> [Editor Agent] Drafting professional email and SMS...`,
+    `> [Reflection Agent] Reviewing draft against tone guidelines...`,
+    `> [Reflection Agent] Groundedness score: 9.8/10. Draft approved.`,
+    `> [Voice Agent] Generating TTS payload for automated call...`,
+    `> Pipeline execution successful. Saving artifacts...`
   ];
 
   useEffect(() => {
@@ -206,10 +206,10 @@ function AIReasoningTerminal({ invoiceId, onClose }) {
       } else {
         clearInterval(interval);
       }
-    }, 600); // Add a new log every 600ms to simulate reasoning
+    }, 800); // 800ms per step
 
     return () => clearInterval(interval);
-  }, []);
+  }, [invoice.id]);
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0b0f19]/90 backdrop-blur-md p-4">
@@ -223,16 +223,23 @@ function AIReasoningTerminal({ invoiceId, onClose }) {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="flex-1 p-6 font-mono text-sm overflow-y-auto bg-black text-emerald-400 space-y-2">
+        <div className="flex-1 p-6 font-mono text-sm overflow-y-auto bg-black text-emerald-400 space-y-3">
           {logs.map((log, idx) => (
-            <div key={idx} className="opacity-0 animate-[fadeIn_0.3s_ease-in_forwards]">
+            <div key={idx} className="transition-opacity duration-500 ease-in opacity-100">
               {log}
             </div>
           ))}
-          <div className="flex items-center gap-2 mt-4 text-slate-500">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            <span>Awaiting subprocess exit...</span>
-          </div>
+          {!isComplete && (
+            <div className="flex items-center gap-2 mt-6 text-indigo-400">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Awaiting subprocess exit...</span>
+            </div>
+          )}
+          {isComplete && (
+            <div className="mt-6 text-emerald-400 font-bold">
+              [System] Process completed. Updating dashboard...
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -316,11 +323,11 @@ function DashboardView() {
     }
   };
 
-  const handleTriggerAI = async (invoiceId) => {
-    setRunningAgentId(invoiceId);
-    setShowTerminal(invoiceId); // Show the live reasoning terminal!
+  const handleTriggerAI = async (invoice) => {
+    setRunningAgentId(invoice.id);
+    setShowTerminal(invoice); // Show the live reasoning terminal with invoice details
     try {
-      await fetch(`${API_BASE_URL}/api/orchestrate/${invoiceId}`, { method: 'POST' });
+      await fetch(`${API_BASE_URL}/api/orchestrate/${invoice.id}`, { method: 'POST' });
       await fetchData();
     } catch (err) {
       console.error(err);
@@ -397,7 +404,7 @@ function DashboardView() {
         </button>
       </header>
 
-      {showTerminal && <AIReasoningTerminal invoiceId={showTerminal} onClose={() => setShowTerminal(null)} />}
+      {showTerminal && <AIReasoningTerminal invoice={showTerminal} onClose={() => setShowTerminal(null)} isComplete={runningAgentId === null} />}
 
       <div className="mb-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 rounded-2xl border border-slate-800 bg-[#131b2f] p-6 shadow-xl relative overflow-hidden">
@@ -449,7 +456,7 @@ function DashboardView() {
                   </div>
                 </div>
                 <button 
-                  onClick={() => handleTriggerAI(invoice.id)}
+                  onClick={() => handleTriggerAI(invoice)}
                   disabled={runningAgentId === invoice.id}
                   className="flex h-8 items-center gap-2 rounded bg-indigo-600 px-3 text-xs font-medium text-white transition-colors hover:bg-indigo-500 disabled:opacity-50"
                 >
