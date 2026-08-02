@@ -20,10 +20,6 @@ build/
 *.egg-info/
 
 # Databases
-*.db
-*.sqlite3
-data/finflow.db
-data/chroma/
 
 # Logs
 logs/*.json
