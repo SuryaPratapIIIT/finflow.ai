@@ -1,0 +1,11 @@
+groq
+chromadb
+sentence-transformers
+langgraph
+fastapi
+uvicorn
+streamlit
+faster-whisper
+edge-tts
+faker
+pandas
