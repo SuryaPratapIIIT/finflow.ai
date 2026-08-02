@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-08-02T19:42:51.545095",
+  "invoice_id": 1,
+  "latency_seconds": 63.31,
+  "prompt_versions": {
+    "finance": "finance_agent_v1.yaml",
+    "editor_email": "editor_agent_email_v1.yaml",
+    "editor_voice": "editor_agent_voice_v1.yaml",
+    "reflection": "reflection_agent_v1.yaml"
+  },
+  "outputs": {
+    "research": {
+      "invoice": {
+        "id": 1,
+        "customer_id": 8,
+        "amount": 3629.08,
+        "due_date": "2026-06-01",
+        "status": "overdue",
+        "days_overdue": 62
+      },
+      "customer": {
+        "id": 8,
+        "name": "Kelly Page",
+        "email": "teresa55@example.org",
+        "phone": "+1-266-922-8689x377",
+        "payment_reliability_score": 36
+      },
+      "payment_history": [],
+      "relevant_policies": [
+        "# Collections Escalation Policy\n- **1-14 Days Overdue:** Gentle email reminders sent every 3 days. Focus on customer service and resolving payment hurdles.\n- **15-30 Days Overdue:** Firm email reminders and a phone call from the account manager. Services may be restricted.\n- **31-60 Days Overdue:** Account is suspended. Final warning letters are issued. \n- **60+ Days Overdue:** Account is referred to an external legal collections agency.",
+        "# Communication Tone Guidelines\n**Gentle (1-14 days late):** Polite, helpful, and empathetic. Assume the customer simply forgot. \n*Example:* \"Hi there, just a quick reminder that invoice #123 is past due. Let us know if you need any help!\"\n**Firm (15-30 days late):** Direct, professional, and urgent. \n*Example:* \"Your invoice #123 is now seriously past due. Please remit payment immediately to avoid service interruption.\"\n**Escalation (30+ days late):** Formal, legal tone.\n*Example:* \"This is a final notice. Failure to pay will result in immediate suspension of services and referral to collections.\"",
+        "# Late Fee Policy\nA 5-day grace period is provided after the due date before late fees are applied.\nOn the 6th day past due, a 1.5% late fee is applied to the outstanding balance.\nFor invoices exceeding 30 days past due, an additional 1.5% late fee is compounded monthly.\nLate fees cannot be waived without approval from the Director of Finance."
+      ]
+    },
+    "assessment": {
+      "error": "Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+    },
+    "drafts": {
+      "error": "Assessment failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+    }
+  },
+  "metrics": {
+    "email_retry_happened": false,
+    "voice_retry_happened": false,
+    "final_email_groundedness": null,
+    "final_voice_groundedness": null
+  }
+}

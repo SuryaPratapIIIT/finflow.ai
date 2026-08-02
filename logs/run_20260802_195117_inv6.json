@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-08-02T19:51:17.133862",
+  "invoice_id": 6,
+  "latency_seconds": 5.49,
+  "prompt_versions": {
+    "finance": "finance_agent_v1.yaml",
+    "editor_email": "editor_agent_email_v1.yaml",
+    "editor_voice": "editor_agent_voice_v1.yaml",
+    "reflection": "reflection_agent_v1.yaml"
+  },
+  "outputs": {
+    "research": {
+      "invoice": {
+        "id": 6,
+        "customer_id": 8,
+        "amount": 2862.05,
+        "due_date": "2026-06-01",
+        "status": "overdue",
+        "days_overdue": 62
+      },
+      "customer": {
+        "id": 8,
+        "name": "Kelly Page",
+        "email": "teresa55@example.org",
+        "phone": "+1-266-922-8689x377",
+        "payment_reliability_score": 36
+      },
+      "payment_history": [],
+      "relevant_policies": [
+        "# Collections Escalation Policy\n- **1-14 Days Overdue:** Gentle email reminders sent every 3 days. Focus on customer service and resolving payment hurdles.\n- **15-30 Days Overdue:** Firm email reminders and a phone call from the account manager. Services may be restricted.\n- **31-60 Days Overdue:** Account is suspended. Final warning letters are issued. \n- **60+ Days Overdue:** Account is referred to an external legal collections agency.",
+        "# Communication Tone Guidelines\n**Gentle (1-14 days late):** Polite, helpful, and empathetic. Assume the customer simply forgot. \n*Example:* \"Hi there, just a quick reminder that invoice #123 is past due. Let us know if you need any help!\"\n**Firm (15-30 days late):** Direct, professional, and urgent. \n*Example:* \"Your invoice #123 is now seriously past due. Please remit payment immediately to avoid service interruption.\"\n**Escalation (30+ days late):** Formal, legal tone.\n*Example:* \"This is a final notice. Failure to pay will result in immediate suspension of services and referral to collections.\"",
+        "# Late Fee Policy\nA 5-day grace period is provided after the due date before late fees are applied.\nOn the 6th day past due, a 1.5% late fee is applied to the outstanding balance.\nFor invoices exceeding 30 days past due, an additional 1.5% late fee is compounded monthly.\nLate fees cannot be waived without approval from the Director of Finance."
+      ]
+    },
+    "assessment": {
+      "urgency": "high",
+      "tone": "escalation",
+      "reasoning": "The invoice is 62 days overdue, which exceeds the 60-day threshold for escalation according to the Collections Escalation Policy, and the customer's payment reliability score is relatively low at 36, indicating a higher risk of non-payment."
+    },
+    "drafts": {
+      "email_version": "Subject: Final Notice: Overdue Invoice #6 for $2862.05\n\nDear Kelly Page,\n\nRe: Invoice #6\n\nThis is a formal, final notice regarding the outstanding balance of $2862.05 for Invoice #6, which was due on June 1, 2026. Unfortunately, we have not received payment from you despite numerous attempts to contact you. As per our Collections Escalation Policy, we are now compelled to take further action.\n\nAs per our records, this invoice has been outstanding for 62 days, exceeding the 60-day threshold for escalation. We have made every effort to communicate with you in a timely and professional manner, but unfortunately, we have not received a response or payment.\n\nPlease be advised that failure to settle this outstanding balance will result in the immediate suspension of services and referral to an external legal collections agency. We understand that unforeseen circumstances may have led to this delay, but we must emphasize the importance of resolving this matter promptly.\n\nAccording to our Late Fee Policy, a 1.5% late fee will be compounded monthly on the outstanding balance, commencing from the 6th day past due. We will not waive these fees without explicit approval from the Director of Finance.\n\nTo avoid further action, please remit payment in full within the next 14 days. You may settle this invoice by:\n\n- Bank transfer: [insert payment details]\n- Check: [insert payment details]\n- Online payment: [insert payment details]\n\nIf you are experiencing difficulties in making payment, please contact us immediately to discuss possible alternatives. We value our relationship with you and are willing to work with you to find a mutually beneficial solution.\n\nPlease confirm receipt of this notice and indicate your intention to settle the outstanding balance.\n\nSincerely,\n\n[Your Name]\nAccounts Receivable Department\n\ncc: [Director of Finance's email]\n\nNote: This email adheres to the escalation tone as per the finance assessment and includes the relevant policies, exact numbers, and a clear call to action.",
+      "voice_script_version": "**Critical Voice Instructions Compliance**\n\nHere is the script for the text-to-speech engine:\n\n**Message Start**\n\nHello, this is [Company Name] calling about your account.\n\n**Pause**\n\nWe have a notice regarding invoice number six, which is currently overdue.\n\n**Pause**\n\nThe invoice was due on the first of June, twenty twenty-six, and it has been sixty-two days past due.\n\n**Pause**\n\nWe understand that sometimes payments can be delayed, but we need to follow our standard procedures to ensure that we can continue to provide services to you.\n\n**Pause**\n\nAccording to our records, your payment reliability score is thirty-six, which indicates a higher risk of non-payment.\n\n**Pause**\n\nWe have tried to contact you previously, but we have not received a response.\n\n**Pause**\n\nWe are now sending a formal notice to inform you that your account will be referred to an external legal collections agency if we do not receive payment within the next few days.\n\n**Pause**\n\nPlease note that late fees will be applied to your outstanding balance, and these fees cannot be waived without approval from the Director of Finance.\n\n**Pause**\n\nIf you have already paid this invoice, please let us know immediately so we can update our records and avoid any further action.\n\n**Branch for Interruption**\n\n*If the customer interrupts to say they already paid:*\n\nThank you for letting us know. We will update our records and ensure that you are not contacted again about this invoice.\n\n**Message End**\n\n**Phone Number and Email (if customer asks for contact information)**\n\nIf you would like to contact us, please call us at five five five, one two three four, or email us at t-e-r-e-s-a at e-x-a-m-p-l-e dot o-r-g.\n\n**Pause**\n\nWe appreciate your prompt attention to this matter, and we look forward to resolving this issue.\n\n**Message End**\n\n**Note:** The script is designed to be read in a clear and concise manner, with natural pauses to allow the customer to process the information. The tone is formal and professional, as per the escalation policy guidelines.",
+      "email_reflection": {
+        "groundedness_score": 5,
+        "tone_score": 5,
+        "issues": "None",
+        "needs_retry": false
+      },
+      "voice_reflection": {
+        "groundedness_score": 5,
+        "tone_score": 5,
+        "issues": [
+          "None"
+        ],
+        "needs_retry": false
+      }
+    }
+  },
+  "metrics": {
+    "email_retry_happened": false,
+    "voice_retry_happened": false,
+    "final_email_groundedness": 5,
+    "final_voice_groundedness": 5
+  }
+}
